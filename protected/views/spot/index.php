@@ -7,8 +7,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Spot', 'url'=>array('create')),
-	array('label'=>'Manage Spot', 'url'=>array('admin')),
+	array('label'=>'Crear Spot', 'url'=>array('create')),
+	array('label'=>'Administrar Spots', 'url'=>array('admin')),
 );
 ?>
 

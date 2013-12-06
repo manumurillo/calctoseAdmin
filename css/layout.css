@@ -1,8 +1,14 @@
 ﻿/*Articulos*/
 /*_______Plantilla 1_______*/
 
+.more_info{
+    width: 600px;
+    border: 1px solid #c6e446;
+    margin-top: 20px;
+    clear:both;
+}
+
 .layout_1 {
-    display:none;
     width: 600px;
     height: 435px;
     background-color: #fff;
@@ -14,12 +20,10 @@
     float: left;
     width: 200px;
     height: 435px;
-	border: solid 1px #ccc;
 }
 
 .layout_1 > .img > .img_footer {
     display:none;
-	border: solid 1px #ccc;
 }
 
 .layout_1 > .title {
@@ -29,7 +33,6 @@
     font-size: 20px;
     font-weight: bold;
     color: #3297cf;
-	border: solid 1px #ccc;
 }
 
 .layout_1 > .content {
@@ -42,13 +45,11 @@
     font-size:10pt;
     color: #5b4547;
     text-align:justify;
-	border: solid 1px #ccc;
 }
 
-.layout_1 > .others {
-    float: left;
-    clear:both;
-    width: 580px;
+.layout_1 > .social {
+    float: right;
+    width: 360px;
     height: 40px;
     margin: 5px 10px 0px 15px;
     text-align: right;
@@ -59,7 +60,6 @@
 /*_______Plantilla 2_______*/
 
 .layout_2 {
-    display:none;
     width: 600px;
     height: 435px;
     background-color: #fff;
@@ -70,7 +70,6 @@
     float: right;
     width: 200px;
     height: 435px;
-	border: solid 1px #ccc;
 }
 
 .layout_2 > .img > .img_footer {
@@ -84,20 +83,18 @@
     font-size: 20px;
     font-weight: bold;
     color: #3297cf;
-	border: solid 1px #ccc;
 }
 
 .layout_2 > .content {
     float: left;
-    width: 370px;
-    height: 270px;
-    margin: 5px 0px 25px 15px;
+    width: 360px;
+    height: 290px;
+    margin: 15px 10px 10px 15px;
     padding-right: 15px;
     overflow: auto;
     font-size:10pt;
     color: #5b4547;
     text-align:justify;
-	border: solid 1px #ccc;
 }
 
 .layout_2 > .social {
@@ -111,7 +108,6 @@
 /*_______Plantilla 3_______*/
 
 .layout_3 {
-    display:none;
     width: 600px;
     height: 435px;
     background-color: #fff;
@@ -123,7 +119,6 @@
     width: 275px;
     height: 310px;
     margin: 0 10px 0 10px;
-	border: solid 1px #ccc;
 }
 
 .layout_3 > .img > .img_footer {
@@ -134,7 +129,6 @@
     text-align: center;
     margin-top: 5px;
     color: #3297cf;
-	border: solid 1px #ccc;
 }
 
 .layout_3 > .title {
@@ -143,8 +137,7 @@
     font-size: 20px;
     font-weight: bold;
     color: #3297cf;
-	border: solid 1px #ccc;
-	width: 400px;
+	width: 560px;
 }
 
 .layout_3 > .content {
@@ -156,7 +149,6 @@
     font-size:10pt;
     color: #5b4547;
     text-align:justify;
-	border: solid 1px #ccc;
 }
 
 .layout_3 > .social {
@@ -170,7 +162,6 @@
 /*_______Plantilla 4_______*/
 
 .layout_4 {
-    display:none;
     width: 600px;
     height: 435px;
     background-color: #fff;
@@ -188,15 +179,14 @@
     font-size: 20px;
     font-weight: bold;
     color: #3297cf;
-	border: solid 1px #ccc;
 }
 
 .layout_4 > .content {
     float: right;
     width: 600px;
-    height: 350px;
+    height: 320px;
+    margin: 20px 0 5px 0;
     overflow: hidden;
-	border: solid 1px #ccc;
 }
 
 .layout_4 > .social {
@@ -207,17 +197,16 @@
 }
 
 
-/*_______NoLayout_______*/
+/*_______layout_5_______*/
 
-.noLayout {
-    display:none;
+.layout_5 {
     width: 600px;
     height: 435px;
     background-color: #fff;
     border: 1px solid #c6e446;
 }
 
-.noLayout > .title {
+.layout_5 > .title {
     float: left;
     margin: 15px 20px;
     font-size: 20px;
@@ -225,7 +214,7 @@
     color: #3297cf;
 }
 
-.noLayout > .content {
+.layout_5 > .content {
     float: right;
     width: 570px;
     margin: 10px 0 10px 10px;
@@ -235,14 +224,13 @@
     font-size:10pt;
     color: #5b4547;
     text-align:justify;
-	border: solid 1px #ccc;
 }
 
-.noLayout > .img {
+.layout_5 > .img {
     display:none;
 }
 
-.noLayout > .social {
+.layout_5 > .social {
     float:left;
     height: 30px;
     margin: 10px 20px 0 20px;
@@ -252,55 +240,70 @@
 
 
 
-/*CONTENIDOS
-.show_more {
-    width: 700px;
-    height: 450px;
+/*_______layout_ _______*/
+
+.layout_ {
+    width: 600px;
+    height: 225px;
     background-color: #fff;
     border: 1px solid #c6e446;
-    padding: 15px;
-    display: none;
 }
 
-.contenido{
+.layout_ > .title {
+    float: left;
+    margin: 15px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #3297cf;
+}
 
-    max-height: 400px;
+.layout_ > .content {
+    float: right;
+    width: 570px;
+    margin: 10px 0 10px 10px;
+    padding-right:15px;
+    height: 100px;
     overflow: auto;
+    font-size:10pt;
+    color: #5b4547;
+    text-align:justify;
 }
-    .show_more > .cerrar {
-        float:right;
-        width: 40px;
-        height:50px;
-        margin: -64px -20px 0 0;
-    }
 
-    .show_more > .titulo {
-        float:left;
-        width: 600px;
-        height:50px;
-        word-wrap:break-word;
-    }
+.layout_ > .img {
+    display:none;
+}
 
-        .show_more > .titulo > h2 {
-            font-size: 18px;
-            color: #4f292b;
-            font-weight: bold;
-        }
+.layout_ > .social {
+    float:left;
+    height: 30px;
+    margin: 10px 20px 0 20px;
+    text-align: center;
+    vertical-align: middle;
+}
 
-    .show_more > .contenido {
-        margin-top: 10px;
-        float: left;
-        width: 690px;
-        margin: 10px auto;
-        padding-right: 10px;
-        font-size: 12px;
-        color: #3c1e20;
-    }
+#imagen_cat{
+    float: left;
+    position: relative;
+    width: 980px;
+    height: 444px;
+    cursor: crosshair;
+}
 
-    .show_more > .contenido > img {
-        float:left;
-        border: 2px solid #5fad6f;
-        margin: 10px;
-    }
-    
-    */
+.img_1{
+    background-image: url("http://www.cal-c-tose.com.mx/images/home/habitacion.jpg");
+}
+.img_2{
+    background-image: url("http://www.cal-c-tose.com.mx/images/home/estancia.jpg");
+}
+.img_3{
+    background-image: url("http://www.cal-c-tose.com.mx/images/home/estudio.jpg");
+}
+.img_4{
+    background-image: url("http://www.cal-c-tose.com.mx/images/home/cocina.jpg");
+}
+.img_5{
+    background-image: url("http://www.cal-c-tose.com.mx/images/home/bano.jpg");
+}
+.img_6{
+    background-image: url("http://www.cal-c-tose.com.mx/images/home/jardin.jpg");
+}

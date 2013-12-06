@@ -51,9 +51,11 @@ class SpotController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
+	    $model = $this->loadModel($id);
+        $this->pageTitle = Yii::app()->name.' ['.$model->id.'] '; 
+        $this->render('view',array(
+            'model'=>$model,
+        ));
 	}
 
 	/**
@@ -62,6 +64,7 @@ class SpotController extends Controller
 	 */
 	public function actionCreate()
 	{
+	    $this->pageTitle = Yii::app()->name.' - Crear Spot'; 
 		$model=new Spot;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -86,6 +89,7 @@ class SpotController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
+	    $this->pageTitle = Yii::app()->name.' - Actualizar Spot'; 
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -110,6 +114,7 @@ class SpotController extends Controller
 	 */
 	public function actionDelete($id)
 	{
+	    $this->pageTitle = Yii::app()->name.' - Eliminar Spot'; 
 		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -122,6 +127,7 @@ class SpotController extends Controller
 	 */
 	public function actionIndex()
 	{
+	    $this->pageTitle = Yii::app()->name.' - Spots'; 
 		$dataProvider=new CActiveDataProvider('Spot');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
@@ -133,6 +139,7 @@ class SpotController extends Controller
 	 */
 	public function actionAdmin()
 	{
+	    $this->pageTitle = Yii::app()->name.' - Administrar Spots'; 
 		$model=new Spot('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Spot']))

@@ -4,15 +4,15 @@
 
 $this->breadcrumbs=array(
 	'Spots'=>array('index'),
-	'Create',
+	'Crear nuevo spot',
 );
 
 $this->menu=array(
-	array('label'=>'List Spot', 'url'=>array('index')),
-	array('label'=>'Manage Spot', 'url'=>array('admin')),
+	array('label'=>'Todos los Spots', 'url'=>array('index')),
+	array('label'=>'Administrar Spots', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Spot</h1>
+<h1>Crear nuevo Spot</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

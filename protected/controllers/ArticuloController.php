@@ -32,7 +32,7 @@ class ArticuloController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update', 'cargarArticulos'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -51,8 +51,10 @@ class ArticuloController extends Controller
 	 */
 	public function actionView($id)
 	{
+	    $model = $this->loadModel($id);
+        $this->pageTitle = Yii::app()->name.' ['.$model->id.'] '.$model->titulo; 
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
 		));
 	}
 
@@ -62,6 +64,7 @@ class ArticuloController extends Controller
 	 */
 	public function actionCreate()
 	{
+	    $this->pageTitle = Yii::app()->name.' - Crear Artículo';
 		$model=new Articulo;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -80,7 +83,7 @@ class ArticuloController extends Controller
             $model->fecha_creacion = date('Y-m-d');
             $model->fecha_actualizacion = date('Y-m-d');
             $model->pie_imagen = $_POST['Articulo']['pie_imagen'];
-            $model->tipo = 2;
+            $model->tipo = Articulo::TIPO_ARTICULO;
             
             $img1 = CUploadedFile::getInstance($model,'thumbnail');
             $img2 = CUploadedFile::getInstance($model,'url_imagen');
@@ -123,21 +126,14 @@ class ArticuloController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
+	    $this->pageTitle = Yii::app()->name.' - Actualizar Artículo';
+		$model=$this->loadModel($_GET['id']);
 
 		if(isset($_POST['Articulo']))
         {
             $model->attributes=$_POST['Articulo'];
-            
-            $model->titulo = $_POST['Articulo']['titulo'];
-            $model->id_categoria = $_POST['Articulo']['id_categoria'];
-            $model->plantilla = $_POST['Articulo']['plantilla'];
-            $model->contenido = utf8_decode($_POST['Articulo']['contenido']);
-            $model->resumen = utf8_decode($_POST['Articulo']['resumen']);
-            $model->id_registro_usuario = $_POST['Articulo']['id_registro_usuario'];
             $model->fecha_actualizacion = date('Y-m-d');
-            $model->pie_imagen = $_POST['Articulo']['pie_imagen'];
-            $model->tipo = 2;
+            $model->fecha_actualizacion = date('Y-m-d');
             
             $img1 = CUploadedFile::getInstance($model,'thumbnail');
             $img2 = CUploadedFile::getInstance($model,'url_imagen');
@@ -151,17 +147,18 @@ class ArticuloController extends Controller
                 $imageFileName2 = $model->generarCodigo(3).$img2->name;
                 $model->url_imagen = $imageFileName2;
             }
-            
+            //print_r($model);
+            //Yii::app()->end();
+            //$model->validate();
+            //Yii::app()->end();
             if($model->save()){
                 if($img1 !== null){
                     $model->subirPorFTP($imageFileName1, $img1->tempName, "images/spots");
                     $img1->saveAs(Yii::app()->basePath."/../images/thumbs/".$imageFileName1);
-                   
                 }
                 if($img2 !== null){
                    $model->subirPorFTP($imageFileName2, $img2->tempName, "images/articulos");
                     $img2->saveAs(Yii::app()->basePath."/../images/articulos/".$imageFileName2);
-                   
                 }
                 $this->redirect(array('view','id'=>$model->id));
             }
@@ -180,6 +177,7 @@ class ArticuloController extends Controller
 	 */
 	public function actionDelete($id)
 	{
+	    $this->pageTitle = Yii::app()->name.' - Eliminar Artículo';
 		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -192,6 +190,7 @@ class ArticuloController extends Controller
 	 */
 	public function actionIndex()
 	{
+	    $this->pageTitle = Yii::app()->name.' - Artículos';
 	    $criteria=new CDbCriteria(array(
             'order'=>'fecha_creacion DESC',
         ));
@@ -213,6 +212,7 @@ class ArticuloController extends Controller
 	 */
 	public function actionAdmin()
 	{
+	    $this->pageTitle = Yii::app()->name.' - Administrar Artículos';
 		$model=new Articulo('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Articulo']))
@@ -250,4 +250,19 @@ class ArticuloController extends Controller
 			Yii::app()->end();
 		}
 	}
+    
+    
+    public function actionCargarArticulos()
+    {
+        $data=Articulo::model()->findAllBySql(
+        "select id, titulo from articulo where id_categoria
+        =:keyword and tipo = 1 order by id asc",
+        array(':keyword'=>$_POST['Spot']['id_categoria']));
+        
+        $data=CHtml::listData($data,'id','fullInfo');
+        foreach($data as $value=>$name)
+        {
+            echo CHtml::tag('option', array('value'=>$value),CHtml::encode($name),true);
+        }
+    }
 }

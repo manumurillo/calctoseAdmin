@@ -1,33 +1,30 @@
 <?php
 
 /**
- * This is the model class for table "spot".
+ * This is the model class for table "registro_usuario".
  *
- * The followings are the available columns in table 'spot':
+ * The followings are the available columns in table 'registro_usuario':
  * @property integer $id
- * @property integer $id_categoria
- * @property integer $id_articulo
- * @property integer $p_top
- * @property integer $p_left
- * @property string $visible
+ * @property string $nombre
+ * @property string $apellidoPaterno
+ * @property string $apellidoMaterno
+ * @property string $email
+ * @property string $estado
+ * @property string $contrasena
+ * @property string $fechaIngreso
+ * @property string $fechaNacimiento
  *
  * The followings are the available model relations:
- * @property Articulo $idArticulo
- * @property Categoria $idCategoria
+ * @property Articulo[] $articulos
  */
-class Spot extends CActiveRecord
+class RegistroUsuario extends CActiveRecord
 {
-    const VISIBLE_SI = "Sí";
-    const VISIBLE_NO = "No";
-    
-    const VISIBLE_TRUE = 1;
-    const VISIBLE_FALSE = 0;
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'spot';
+		return 'registro_usuario';
 	}
 
 	/**
@@ -38,12 +35,12 @@ class Spot extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-		    array('id_categoria, id_articulo, p_top, p_left', 'required'),
-			array('id_categoria, id_articulo, p_top, p_left', 'numerical', 'integerOnly'=>true),
-			array('visible', 'length', 'max'=>10),
+			array('nombre, apellidoPaterno, apellidoMaterno, email', 'length', 'max'=>250),
+			array('estado, contrasena', 'length', 'max'=>50),
+			array('fechaIngreso, fechaNacimiento', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, id_categoria, id_articulo, p_top, p_left, visible', 'safe', 'on'=>'search'),
+			array('id, nombre, apellidoPaterno, apellidoMaterno, email, estado, contrasena, fechaIngreso, fechaNacimiento', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,8 +52,7 @@ class Spot extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idArticulo' => array(self::BELONGS_TO, 'Articulo', 'id_articulo'),
-			'idCategoria' => array(self::BELONGS_TO, 'Categoria', 'id_categoria'),
+			'articulos' => array(self::HAS_MANY, 'Articulo', 'id_registro_usuario'),
 		);
 	}
 
@@ -67,11 +63,14 @@ class Spot extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'id_categoria' => 'Categoria',
-			'id_articulo' => 'Artículo',
-			'p_top' => 'Posición Top',
-			'p_left' => 'Posición Left',
-			'visible' => 'Visible',
+			'nombre' => 'Nombre',
+			'apellidoPaterno' => 'Apellido Paterno',
+			'apellidoMaterno' => 'Apellido Materno',
+			'email' => 'Email',
+			'estado' => 'Estado',
+			'contrasena' => 'Contrasena',
+			'fechaIngreso' => 'Fecha Ingreso',
+			'fechaNacimiento' => 'Fecha Nacimiento',
 		);
 	}
 
@@ -94,17 +93,17 @@ class Spot extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('id_categoria',$this->id_categoria);
-		$criteria->compare('id_articulo',$this->id_articulo);
-		$criteria->compare('p_top',$this->p_top);
-		$criteria->compare('p_left',$this->p_left);
-		$criteria->compare('visible',$this->visible,true);
+		$criteria->compare('nombre',$this->nombre,true);
+		$criteria->compare('apellidoPaterno',$this->apellidoPaterno,true);
+		$criteria->compare('apellidoMaterno',$this->apellidoMaterno,true);
+		$criteria->compare('email',$this->email,true);
+		$criteria->compare('estado',$this->estado,true);
+		$criteria->compare('contrasena',$this->contrasena,true);
+		$criteria->compare('fechaIngreso',$this->fechaIngreso,true);
+		$criteria->compare('fechaNacimiento',$this->fechaNacimiento,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-			'sort'=>array(
-                'defaultOrder'=>'id_categoria ASC',
-              )
 		));
 	}
 
@@ -112,21 +111,15 @@ class Spot extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Spot the static model class
+	 * @return RegistroUsuario the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
-
-    public static function getVisibleText($value)
+    
+    public function getName()
     {
-        if($value == 1)
-            return Spot::VISIBLE_SI;
-        else {
-            return Spot::VISIBLE_NO;
-        }
-        
+        return $this->nombre.' '.$this->apellidoPaterno;
     }
-
 }

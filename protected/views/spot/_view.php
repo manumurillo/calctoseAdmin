@@ -10,23 +10,23 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('id_categoria')); ?>:</b>
-	<?php echo CHtml::encode($data->id_categoria); ?>
+	<?php echo CHtml::encode($data->idCategoria->nombre); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('id_articulo')); ?>:</b>
-	<?php echo CHtml::encode($data->id_articulo); ?>
+	<?php echo CHtml::encode($data->idArticulo->titulo); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('p_top')); ?>:</b>
-	<?php echo CHtml::encode($data->p_top); ?>
+	<?php echo CHtml::encode($data->p_top); ?>px.
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('p_left')); ?>:</b>
-	<?php echo CHtml::encode($data->p_left); ?>
+	<?php echo CHtml::encode($data->p_left); ?>px.
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('visible')); ?>:</b>
-	<?php echo CHtml::encode($data->visible); ?>
+	<?php echo CHtml::encode(Spot::model()->getVisibleText($data->visible)); ?>
 	<br />
 
 

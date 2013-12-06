@@ -50,12 +50,23 @@ $thumbDir = 'http://www.cal-c-tose-com.mx/images/spots/';
 		  'type' => 'raw',
 		  'value' => 'CHtml::link(CHtml::encode($data->titulo), array("view", "id"=>$data->id))'
         ),
+        array(
+            'name' => 'tipo',
+            'value' => function($data){
+                     return Articulo::getTipoText($data->tipo);
+                   }
+        ),
 		'resumen',
         array(
             'name'=>'fecha_creacion',
-            'value' => 'Yii::app()->dateFormatter->format("dd-MMM-y", $data->fecha_creacion)',
+            'value' => 'Yii::app()->dateFormatter->format("dd/MMMM/y", $data->fecha_creacion)',
             'filter'=>false,
         ),
+        array(
+            'name'=>'id_categoria',
+            'value'=>'$data->idCategoria->nombre',
+        ),
+        
 		array(
 			'class'=>'CButtonColumn',
 		),

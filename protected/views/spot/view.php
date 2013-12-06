@@ -8,15 +8,15 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Spot', 'url'=>array('index')),
-	array('label'=>'Create Spot', 'url'=>array('create')),
-	array('label'=>'Update Spot', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Spot', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Spot', 'url'=>array('admin')),
+	array('label'=>'Todos los spots', 'url'=>array('index')),
+	array('label'=>'Crear Spot', 'url'=>array('create')),
+	array('label'=>'Editar Spot', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Eliminar Spot', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'¿Está seguro de eliminar este spot?')),
+	array('label'=>'Administrar Spots', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Spot #<?php echo $model->id; ?></h1>
+<h1>Ver Spot #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

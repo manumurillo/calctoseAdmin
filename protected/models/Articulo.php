@@ -26,6 +26,19 @@
  */
 class Articulo extends CActiveRecord
 {
+    const PLANTILLA_1 = "Imagen a la izquierda";
+    const PLANTILLA_2 = "Imagen a la derecha";
+    const PLANTILLA_3 = "Dos columnas";
+    const PLANTILLA_4 = "Vídeo";
+    const PLANTILLA_5 = "Sólo contenido";
+    const PLANTILLA_UND = "Sin plantilla";
+    
+    const TIPO_ARTICULO = 1;
+    const TIPO_CONSEJO = 2;
+    
+    const TIPO_ARTICULO_TEXT = "Artículo";
+    const TIPO_CONSEJO_TEXT = "Consejo";
+    
 	/**
 	 * @return string the associated database table name
 	 */
@@ -81,7 +94,7 @@ class Articulo extends CActiveRecord
 			'fecha_creacion' => 'Fecha Creación',
 			'fecha_actualizacion' => 'Fecha Actualización',
 			'id_categoria' => 'Categoria',
-			'id_registro_usuario' => 'Id Usuario',
+			'id_registro_usuario' => 'Usuario',
 			'plantilla' => 'Plantilla',
 			'url_imagen' => 'Url Imagen',
 			'pie_imagen' => 'Pie Imagen',
@@ -124,9 +137,12 @@ class Articulo extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'pagination'=>array(
+                'pageSize'=>15,
+             ),
             'sort'=>array(
                 'defaultOrder'=>'fecha_creacion DESC',
-              )
+             ),
                         
 		));
 	}
@@ -173,6 +189,45 @@ class Articulo extends CActiveRecord
         ftp_login($connect,$username,$pwd)or die("Authorization Failed");       
         ftp_pasv($connect, true);
         ftp_put($connect,$d.'/'.$filename,$tmp,FTP_BINARY)or die("Unable to upload");
+    }
+    
+    public function getFullInfo()
+    {
+        return $this->id.' - '.$this->titulo;
+    }
+    
+    public static function getPlantillaText($value)
+    {
+        if($value == 1)
+            return Articulo::PLANTILLA_1;
+        else if($value == 2)
+            return Articulo::PLANTILLA_2;
+        else if($value == 3)
+            return Articulo::PLANTILLA_3;
+        else if($value == 4)
+            return Articulo::PLANTILLA_4;
+        else if($value == 5)
+            return Articulo::PLANTILLA_5;      
+        else 
+            return Articulo::PLANTILLA_UND;
+    }
+    
+    public static function getTipoText($value)
+    {
+        if($value == 1)
+            return Articulo::TIPO_ARTICULO_TEXT;
+        else if($value == 2)
+            return Articulo::TIPO_CONSEJO_TEXT;
+    }
+    
+    public function cargarArticulos($id_cat)
+    {
+        $data=Articulo::model()->findAllBySql(
+        "select id, titulo from articulo where id_categoria
+        =:keyword and tipo = 1 order by id asc", array(':keyword'=>$id_cat));
+        
+        return $data;
+        Yii::app()->end();
     }
         
 }

@@ -1,33 +1,24 @@
 <?php
 
 /**
- * This is the model class for table "spot".
+ * This is the model class for table "tip".
  *
- * The followings are the available columns in table 'spot':
+ * The followings are the available columns in table 'tip':
  * @property integer $id
- * @property integer $id_categoria
- * @property integer $id_articulo
- * @property integer $p_top
- * @property integer $p_left
- * @property string $visible
- *
- * The followings are the available model relations:
- * @property Articulo $idArticulo
- * @property Categoria $idCategoria
+ * @property string $titulo
+ * @property string $contenido
+ * @property string $fecha_creacion
+ * @property string $fecha_actualizacion
+ * @property integer $destacado
  */
-class Spot extends CActiveRecord
+class Tip extends CActiveRecord
 {
-    const VISIBLE_SI = "Sí";
-    const VISIBLE_NO = "No";
-    
-    const VISIBLE_TRUE = 1;
-    const VISIBLE_FALSE = 0;
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'spot';
+		return 'tip';
 	}
 
 	/**
@@ -38,12 +29,12 @@ class Spot extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-		    array('id_categoria, id_articulo, p_top, p_left', 'required'),
-			array('id_categoria, id_articulo, p_top, p_left', 'numerical', 'integerOnly'=>true),
-			array('visible', 'length', 'max'=>10),
+			array('contenido, fecha_creacion', 'required'),
+			array('destacado', 'numerical', 'integerOnly'=>true),
+			array('titulo, fecha_actualizacion', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, id_categoria, id_articulo, p_top, p_left, visible', 'safe', 'on'=>'search'),
+			array('id, titulo, contenido, fecha_creacion, fecha_actualizacion, destacado', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,8 +46,6 @@ class Spot extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idArticulo' => array(self::BELONGS_TO, 'Articulo', 'id_articulo'),
-			'idCategoria' => array(self::BELONGS_TO, 'Categoria', 'id_categoria'),
 		);
 	}
 
@@ -67,11 +56,11 @@ class Spot extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'id_categoria' => 'Categoria',
-			'id_articulo' => 'Artículo',
-			'p_top' => 'Posición Top',
-			'p_left' => 'Posición Left',
-			'visible' => 'Visible',
+			'titulo' => 'Titulo',
+			'contenido' => 'Contenido',
+			'fecha_creacion' => 'Fecha Creacion',
+			'fecha_actualizacion' => 'Fecha Actualizacion',
+			'destacado' => 'Destacado',
 		);
 	}
 
@@ -94,17 +83,14 @@ class Spot extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('id_categoria',$this->id_categoria);
-		$criteria->compare('id_articulo',$this->id_articulo);
-		$criteria->compare('p_top',$this->p_top);
-		$criteria->compare('p_left',$this->p_left);
-		$criteria->compare('visible',$this->visible,true);
+		$criteria->compare('titulo',$this->titulo,true);
+		$criteria->compare('contenido',$this->contenido,true);
+		$criteria->compare('fecha_creacion',$this->fecha_creacion,true);
+		$criteria->compare('fecha_actualizacion',$this->fecha_actualizacion,true);
+		$criteria->compare('destacado',$this->destacado);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-			'sort'=>array(
-                'defaultOrder'=>'id_categoria ASC',
-              )
 		));
 	}
 
@@ -112,21 +98,10 @@ class Spot extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Spot the static model class
+	 * @return Tip the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
-
-    public static function getVisibleText($value)
-    {
-        if($value == 1)
-            return Spot::VISIBLE_SI;
-        else {
-            return Spot::VISIBLE_NO;
-        }
-        
-    }
-
 }

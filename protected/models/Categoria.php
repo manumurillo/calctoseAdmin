@@ -100,4 +100,10 @@ class Categoria extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+    
+    
+    public function getFullInfo()
+    {
+        return $this->id.' - '.$this->nombre;
+    }
 }
