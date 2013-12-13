@@ -54,7 +54,8 @@ $thumbDir = 'http://www.cal-c-tose-com.mx/images/spots/';
             'name' => 'tipo',
             'value' => function($data){
                      return Articulo::getTipoText($data->tipo);
-                   }
+                   },
+           'filter' => CHtml::dropDownList('Articulo[tipo]','', array(1 => 'Artículo', 2 => 'Consejo'), array('empty' => 'Todos')),                           
         ),
 		'resumen',
         array(
@@ -65,6 +66,7 @@ $thumbDir = 'http://www.cal-c-tose-com.mx/images/spots/';
         array(
             'name'=>'id_categoria',
             'value'=>'$data->idCategoria->nombre',
+            'filter' => CHtml::dropDownList('Articulo[id_categoria]','',CHtml::listData(Categoria::model()->findall(), 'id', 'nombre'), array('empty' => 'Todos'))
         ),
         
 		array(

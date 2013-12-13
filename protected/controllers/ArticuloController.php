@@ -133,7 +133,6 @@ class ArticuloController extends Controller
         {
             $model->attributes=$_POST['Articulo'];
             $model->fecha_actualizacion = date('Y-m-d');
-            $model->fecha_actualizacion = date('Y-m-d');
             
             $img1 = CUploadedFile::getInstance($model,'thumbnail');
             $img2 = CUploadedFile::getInstance($model,'url_imagen');
@@ -234,7 +233,7 @@ class ArticuloController extends Controller
 	{
 		$model=Articulo::model()->findByPk($id);
 		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+			throw new CHttpException(404,'La página solicitada no existe.');
 		return $model;
 	}
 

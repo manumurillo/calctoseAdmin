@@ -52,8 +52,8 @@
 		<?php echo $form->error($model,'id_articulo'); ?>
 	</div>
 
-    <div id="imagen_cat" class="" style="display: none;">
-        
+    <div id="imagen_cat" class="<?php echo $model->isNewRecord ? '' : 'img_'.$model->id_categoria; ?>" style="display:<?php echo $model->isNewRecord ? 'none' : 'block'; ?>">
+        <div id="tip" class="point" style="display: <?php echo $model->isNewRecord ? 'none' : 'block; left:'.$model->p_left.'px; top:'.$model->p_top.'px;'; ?>"></div>
     </div>
 	<div class="row">
 		<?php echo $form->labelEx($model,'p_top'); ?>

@@ -10,8 +10,8 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Todos los spots', 'url'=>array('index')),
 	array('label'=>'Crear Spot', 'url'=>array('create')),
-	array('label'=>'Editar Spot', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Eliminar Spot', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'¿Está seguro de eliminar este spot?')),
+	array('label'=>'Editar', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Eliminar', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'¿Está seguro de eliminar este spot?')),
 	array('label'=>'Administrar Spots', 'url'=>array('admin')),
 );
 ?>
@@ -22,10 +22,27 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id',
-		'id_categoria',
-		'id_articulo',
-		'p_top',
-		'p_left',
-		'visible',
+		array(
+            'name'=>'id_categoria',
+            'value'=>$model->idCategoria->nombre,
+        ),
+        array(
+            'name' =>'id_articulo',
+            'value'=>$model->idArticulo->titulo,
+        ),
+        array(
+            'name' => 'p_top',
+            'value' => $model->p_top.'px'
+        ),
+        array(
+            'name' => 'p_left',
+            'value' => $model->p_left.'px'
+        ),
+		array(
+            'name' => 'visible',
+            'value' => function($model){
+                     return Spot::getVisibleText($model->visible);
+                   }
+        ),
 	),
 )); ?>

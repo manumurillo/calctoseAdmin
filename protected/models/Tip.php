@@ -13,6 +13,12 @@
  */
 class Tip extends CActiveRecord
 {
+    const DESTACADO_TEXT_TRUE = "Sí";
+    const DESTACADO_TEXT_FALSE = "No";
+    
+    const DESTACADO_TRUE = 1;
+    const DESTACADO_FALSE = 0;
+     
 	/**
 	 * @return string the associated database table name
 	 */
@@ -29,9 +35,9 @@ class Tip extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('contenido, fecha_creacion', 'required'),
+			array('contenido, fecha_creacion, destacado', 'required'),
 			array('destacado', 'numerical', 'integerOnly'=>true),
-			array('titulo, fecha_actualizacion', 'safe'),
+			array('titulo, contenido, fecha_actualizacion', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, titulo, contenido, fecha_creacion, fecha_actualizacion, destacado', 'safe', 'on'=>'search'),
@@ -56,10 +62,10 @@ class Tip extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'titulo' => 'Titulo',
+			'titulo' => 'Título',
 			'contenido' => 'Contenido',
-			'fecha_creacion' => 'Fecha Creacion',
-			'fecha_actualizacion' => 'Fecha Actualizacion',
+			'fecha_creacion' => 'Fecha Creación',
+			'fecha_actualizacion' => 'Fecha Actualización',
 			'destacado' => 'Destacado',
 		);
 	}
@@ -91,6 +97,12 @@ class Tip extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'pagination'=>array(
+                'pageSize'=>15,
+             ),
+            'sort'=>array(
+                'defaultOrder'=>'id DESC',
+             ),
 		));
 	}
 
@@ -104,4 +116,15 @@ class Tip extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+    
+    
+    public static function getDestacadoText($value)
+    {
+        if($value == Tip::DESTACADO_TRUE)
+            return Tip::DESTACADO_TEXT_TRUE;
+        else {
+           return Tip::DESTACADO_TEXT_FALSE;
+        }
+        
+    }
 }

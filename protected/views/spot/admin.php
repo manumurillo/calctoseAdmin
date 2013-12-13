@@ -42,23 +42,35 @@ $('.search-form form').submit(function(){
 	'columns'=>array(
 		'id',
 		array(
-            'name'=>'id_categoria',
-            'value'=>'$data->idCategoria->nombre',
+            'name' => 'id_categoria',
+            'value' => '$data->idCategoria->nombre',
+            'filter' => CHtml::dropDownList('Articulo[id_categoria]','',CHtml::listData(Categoria::model()->findall(), 'id', 'nombre'), array('empty' => 'Todos'))
         ),
 		array(
-            'name'=>'id_articulo',
-            'value'=>'$data->idArticulo->titulo',
+            'name' => 'id_articulo',
+            'value' => '$data->idArticulo->titulo',
+            'filter' => false
         ),
-		'p_top',
-		'p_left',
+        array(
+            'name' => 'p_top',
+            'value' => '$data->p_top',
+            'filter' => false
+        ),
+        array(
+            'name' => 'p_left',
+            'value' => '$data->p_left',
+            'filter' => false
+        ),
+
 		array(
             'name' => 'visible',
             'value' => function($data){
                      return Spot::getVisibleText($data->visible);
-                   }
+                   },
+            'filter' => CHtml::dropDownList('Spot[visible]','', array(1 => 'Sí', 0 => 'No'), array('empty' => 'Todos')),               
         ),
 		array(
-			'class'=>'CButtonColumn',
+			'class' => 'CButtonColumn',
 		),
 	),
 )); ?>

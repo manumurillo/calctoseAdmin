@@ -42,8 +42,23 @@ jQuery(document).ready(function() {
     });
     
     jQuery('#imagen_cat').click(function(e){
-            jQuery('#Spot_p_left').val(e.offsetX);
-            jQuery('#Spot_p_top').val(e.offsetY);
+            /**/
+
+              if(e.offsetX==undefined) // this works for Firefox
+              {
+                xpos = Math.round(e.pageX-$('#imagen_cat').offset().left);
+                ypos = Math.round(e.pageY-$('#imagen_cat').offset().top);
+              }             
+              else                     // works in Google Chrome
+              {
+                xpos = e.offsetX;
+                ypos = e.offsetY;
+              }
+                jQuery('#Spot_p_left').val(xpos);
+                jQuery('#Spot_p_top').val(ypos);
+                jQuery('#tip').css("left", xpos-11+"px");
+                jQuery('#tip').css("top", ypos-11+"px");
+                jQuery('#tip').css("display", "block");
     });
 
 });

@@ -307,3 +307,10 @@
 .img_6{
     background-image: url("http://www.cal-c-tose.com.mx/images/home/jardin.jpg");
 }
+
+.point{
+    position: absolute;
+    background-image: url("http://cal-c-tose.com.mx/images/bullets/contracted_bullet.png");
+    width: 21px;
+    height: 20px;
+}

@@ -23,15 +23,34 @@
 <div class="container" id="page">
 
 	<div id="header">
-		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+		<div id="logo"><img src="http://www.cal-c-tose.com.mx/images/marca/logo_cct.png" alt="CCT Logo" style="vertical-align: middle;"/> <?php echo CHtml::encode(Yii::app()->name); ?></div>
 	</div><!-- header -->
 
-	<div id="mainmenu">
-		<?php $this->widget('zii.widgets.CMenu',array(
+	<div id="mainMbMenu">
+		<?php $this->widget('application.extensions.mbmenu.MbMenu',array(
 			'items'=>array(
 				array('label'=>'Inicio', 'url'=>array('/site/index')),
-				array('label'=>'Articulos', 'url'=>array('/articulo')),
-				array('label'=>'Spots', 'url'=>array('/spot')),
+				array('label'=>'Articulos', 'url'=>array('/articulo'),
+                    'items'=>array(
+                                array('label'=>'Crear nuevo artículo', 'url'=>array('/articulo/create')),
+                                array('label'=>'Todos los artículos', 'url'=>array('/articulo/index')),
+                                array('label'=>'Administrar artículos', 'url'=>array('/articulo/admin')),
+                    ),
+                ),
+				array('label'=>'Spots', 'url'=>array('/spot'),
+                    'items'=>array(
+                                array('label'=>'Crear nuevo spot', 'url'=>array('/spot/create')),
+                                array('label'=>'Ver todos los spots', 'url'=>array('/spot/index')),
+                                array('label'=>'Administrar spots', 'url'=>array('/spot/admin')),
+                    ),                
+                ),
+				array('label'=>'Tips', 'url'=>array('/tip'),
+                    'items'=>array(
+                                array('label'=>'Crear nuevo tip', 'url'=>array('/tip/create')),
+                                array('label'=>'Ver todos los tips', 'url'=>array('/tip/index')),
+                                array('label'=>'Administrar tips', 'url'=>array('/tip/admin')),
+                    ),                
+                ),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
@@ -48,7 +67,7 @@
 	<div class="clear"></div>
 
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
+		Copyright &copy; <?php echo date('Y'); ?> por Havas Worldwide México.<br/>
 		All Rights Reserved.<br/>
 		<?php echo Yii::powered(); ?>
 	</div><!-- footer -->
