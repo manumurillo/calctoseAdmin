@@ -68,7 +68,7 @@
 
 	<div id="footer">
 		Copyright &copy; <?php echo date('Y'); ?> por Havas Worldwide México.<br/>
-		All Rights Reserved.<br/>
+		Todos los derechos reservados.<br/>
 		<?php echo Yii::powered(); ?>
 	</div><!-- footer -->
 

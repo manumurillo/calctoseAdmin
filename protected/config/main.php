@@ -39,7 +39,7 @@ return array(
 			'allowAutoLogin'=>true,
 		),
 		// uncomment the following to enable URLs in path-format
-		'urlManager'=>array(
+		/*'urlManager'=>array(
 			'urlFormat'=>'path',
 			'showScriptName'=>false,
 			'rules'=>array(
@@ -51,7 +51,7 @@ return array(
 				'<controller:\w+>/<action:\w+>/<id:\d+>/*'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
-		),
+		),*/
 		/*
 		'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
@@ -59,19 +59,17 @@ return array(
 		*/
 		// uncomment the following to use a MySQL database
 		/*
-		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
-			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
-			'charset' => 'utf8',
-		),
-		*/
 		'db' => array(
             'connectionString' => 'sqlsrv:server=216.87.164.4;Database=CalCTose2013_2;',
             'username' => 'usrCalctose',
             'password' => 'bdc4lcT053',
             'charset' => 'utf8',
+        ),
+		*/
+		'db' => array(
+            'connectionString' => 'dblib:server=216.87.164.4;dbname=CalCTose2013_2;',
+            'username' => 'usrCalctose',
+            'password' => 'bdc4lcT053',
         ),
 		
         /*
@@ -80,16 +78,6 @@ return array(
 			'username' => 'userCalctose',
 			'password' => 'C4LC-TO5E',
 			'charset' => 'utf8',
-        ),
-        
-        
-        
-		
-        'db' => array(
-            'connectionString' => 'dblib:host=10.160.24.31\SQLEXPRESS;dbname=CCT2013',
-			'username' => 'sa',
-			'password' => 'havas1979',
-			//'charset' => 'utf8',
         ),
 		*/
 
